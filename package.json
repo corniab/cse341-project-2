@@ -1,0 +1,19 @@
+{
+  "name": "cse341-project-2",
+  "version": "1.0.0",
+  "description": "* Create a backend for storing sheet metal specs\r * Include a table for storing dies\r * Build a frontend that enables the user to select sheetmetal and dies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
+  }
+}

@@ -7,8 +7,12 @@ const express_1 = __importDefault(require("express"));
 const connection_db_1 = require("./src/db/connection.db");
 const index_routes_1 = __importDefault(require("./src/routes/index.routes"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_1 = __importDefault(require("./swagger"));
 // Create express app
 const app = (0, express_1.default)();
+// Serve api docs
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.default));
 // Specify port
 const port = process.env.PORT || 3000;
 // Include body parser

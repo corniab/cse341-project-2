@@ -16,11 +16,11 @@ function getAllMaterials(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = yield (0, material_db_1.findAllMaterials)();
         if (result) {
-            console.log("[database] /GET materials success!");
+            console.log("😻 [database] /GET materials success!");
             res.json(result);
         }
         else {
-            console.log("[database] /GET materials failed!");
+            console.log("😿 [database] /GET materials failed!");
         }
     });
 }

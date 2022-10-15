@@ -5,10 +5,10 @@ import { findAllMaterials, insertNewMaterial } from "../db/material.db";
 export async function getAllMaterials(req: Request, res: Response) {
   const result = await findAllMaterials();
   if (result) {
-    console.log("[database] /GET materials success!");
+    console.log("😻 [database] /GET materials success!");
     res.json(result);
   } else {
-    console.log("[database] /GET materials failed!");
+    console.log("😿 [database] /GET materials failed!");
   }
 }
 

@@ -4,7 +4,7 @@ import path from "path";
 
 class Connection {
   private uri: string;
-  private client: Mongoose;
+  client: Mongoose;
   constructor() {
     // Make environment variables available in application
     dotenv.config({ path: path.resolve(__dirname, "../config/.env") });
@@ -19,7 +19,7 @@ class Connection {
   async init() {
     console.log("🔌 [database] Connecting to db...");
     try {
-      await this.client.connect(this.uri);
+      await this.client.connect(this.uri, { dbName: "sheetmetal" });
       console.log("🤝 [database] Connection complete!");
     } catch (e) {
       console.log("😿 [database] Error: " + e);

@@ -29,7 +29,7 @@ class Connection {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("🔌 [database] Connecting to db...");
             try {
-                yield this.client.connect(this.uri);
+                yield this.client.connect(this.uri, { dbName: "sheetmetal" });
                 console.log("🤝 [database] Connection complete!");
             }
             catch (e) {

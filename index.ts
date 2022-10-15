@@ -1,15 +1,21 @@
 import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import { connection } from "./src/db/connection.db";
 
-dotenv.config();
-
+// Create express app
 const app: Express = express();
+
+// Specify port
 const port = process.env.PORT || 3000;
 
+// Initial route
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+  res.send("Hello World 😻");
 });
 
+// Connect database
+connection.init();
+
+// Start server
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+  console.log(`⚡️ [ server ] Server is running on port: ${port}`);
 });

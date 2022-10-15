@@ -1,0 +1,23 @@
+// LOCALHOST
+
+// ---------------------------------------------------------> GET
+###
+GET https://project-2.onrender.com/materials HTTP/1.1
+
+
+// ---------------------------------------------------------> POST
+###
+POST https://project-2.onrender.com/materials HTTP/1.1
+Content-Type: application/json
+
+{
+  "type": "steel",
+  "grade": "A36",
+  "thickness": "1/4",
+  "weightPerSqFoot": "50",
+  "tensileStrength": "841",
+  "sheetWidth": "4",
+  "sheetHeight": "12",
+  "millProcess": "cold-rolled",
+  "pricePerSqFoot": "5"
+}

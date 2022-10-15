@@ -17,7 +17,6 @@ function getAllMaterials(req, res) {
         const result = yield (0, material_db_1.findAllMaterials)();
         if (result) {
             console.log("[database] /GET materials success!");
-            console.log(result);
             res.json(result);
         }
         else {

@@ -6,7 +6,6 @@ export async function getAllMaterials(req: Request, res: Response) {
   const result = await findAllMaterials();
   if (result) {
     console.log("[database] /GET materials success!");
-    console.log(result);
     res.json(result);
   } else {
     console.log("[database] /GET materials failed!");

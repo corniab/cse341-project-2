@@ -1,8 +1,5 @@
 import express from "express";
-import {
-  getAllMaterials,
-  createNewMaterial,
-} from "../controllers/material.controllers";
+import * as controller from "../controllers/material.controllers";
 
 const materialRouter = express.Router();
 
@@ -15,7 +12,24 @@ const materialRouter = express.Router();
  *        200:
  *          description: Success
  */
-materialRouter.get("/", getAllMaterials);
+materialRouter.get("/", controller.getAllMaterials);
+
+/**
+ * @swagger
+ * /materials/{id}:
+ *    get:
+ *      description: Get material by id
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Success
+ */
+materialRouter.get("/:id", controller.getMaterialById);
 
 /**
  * @swagger
@@ -65,10 +79,76 @@ materialRouter.get("/", getAllMaterials);
  *        201:
  *          description: Created
  */
-materialRouter.post("/", createNewMaterial);
+materialRouter.post("/", controller.createNewMaterial);
 
-// PUT
+/**
+ * @swagger
+ * /materials/{id}:
+ *   put:
+ *     description: Update material by id
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: type
+ *         in: formData
+ *         required: false
+ *         type: string
+ *       - name: grade
+ *         in: formData
+ *         required: false
+ *         type: string
+ *       - name: thickness
+ *         in: formData
+ *         required: false
+ *         type: string
+ *       - name: weightPerSqFoot
+ *         in: formData
+ *         required: false
+ *         type: string
+ *       - name: tensileStrength
+ *         in: formData
+ *         required: false
+ *         type: string
+ *       - name: sheetWidth
+ *         in: formData
+ *         required: false
+ *         type: string
+ *       - name: sheetHeight
+ *         in: formData
+ *         required: false
+ *         type: string
+ *       - name: millProcess
+ *         in: formData
+ *         required: false
+ *         type: string
+ *       - name: pricePerSqFoot
+ *         in: formData
+ *         required: false
+ *         type: string
+ *     responses:
+ *       204:
+ *         description:
+ */
+materialRouter.put("/:id", controller.updateMaterialById);
 
-// DELETE
+/**
+ * @swagger
+ * /materials/{id}:
+ *    delete:
+ *      description: Delete material by id
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Success
+ */
+materialRouter.delete("/:id", controller.deleteMaterialById);
 
 export default materialRouter;

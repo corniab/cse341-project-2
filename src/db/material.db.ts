@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { connection } from "./connection.db";
+import connection from "./connection.db";
 
 const materialSchema = new Schema({
   type: String,
@@ -20,7 +20,22 @@ export async function findAllMaterials() {
   return materials;
 }
 
+export async function findMaterialById(id: String) {
+  const material = await Material.findById(id);
+  return material;
+}
+
 export async function insertNewMaterial(newMaterial: Object) {
   const result = await Material.create(newMaterial);
+  return result;
+}
+
+export async function updateMaterial(id: String, requestBody: Object) {
+  const result = await Material.updateOne({ _id: id }, requestBody);
+  return result;
+}
+
+export async function deleteMaterial(id: String) {
+  const result = await Material.deleteOne({ _id: id });
   return result;
 }

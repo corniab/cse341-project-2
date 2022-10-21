@@ -26,5 +26,5 @@ class Connection {
     }
   }
 }
-
-export const connection = new Connection();
+const connection = new Connection();
+export default connection;

@@ -8,10 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insertNewMaterial = exports.findAllMaterials = void 0;
+exports.deleteMaterial = exports.updateMaterial = exports.insertNewMaterial = exports.findMaterialById = exports.findAllMaterials = void 0;
 const mongoose_1 = require("mongoose");
-const connection_db_1 = require("./connection.db");
+const connection_db_1 = __importDefault(require("./connection.db"));
 const materialSchema = new mongoose_1.Schema({
     type: String,
     grade: String,
@@ -23,7 +26,7 @@ const materialSchema = new mongoose_1.Schema({
     millProcess: String,
     pricePerSqFoot: String,
 });
-const Material = connection_db_1.connection.client.model("Material", materialSchema);
+const Material = connection_db_1.default.client.model("Material", materialSchema);
 function findAllMaterials() {
     return __awaiter(this, void 0, void 0, function* () {
         const materials = yield Material.find({});
@@ -31,6 +34,13 @@ function findAllMaterials() {
     });
 }
 exports.findAllMaterials = findAllMaterials;
+function findMaterialById(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const material = yield Material.findById(id);
+        return material;
+    });
+}
+exports.findMaterialById = findMaterialById;
 function insertNewMaterial(newMaterial) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = yield Material.create(newMaterial);
@@ -38,3 +48,17 @@ function insertNewMaterial(newMaterial) {
     });
 }
 exports.insertNewMaterial = insertNewMaterial;
+function updateMaterial(id, requestBody) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const result = yield Material.updateOne({ _id: id }, requestBody);
+        return result;
+    });
+}
+exports.updateMaterial = updateMaterial;
+function deleteMaterial(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const result = yield Material.deleteOne({ _id: id });
+        return result;
+    });
+}
+exports.deleteMaterial = deleteMaterial;

@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from "express";
-import { connection } from "./src/db/connection.db";
+import connection from "./src/db/connection.db";
 import router from "./src/routes/index.routes";
 import BodyParser from "body-parser";
 import swaggerUI from "swagger-ui-express";

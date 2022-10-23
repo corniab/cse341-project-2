@@ -58,9 +58,8 @@ function getMaterialById(req, res) {
         if (errors.isEmpty() === false) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { id } = req.params;
         const result = yield db
-            .findMaterialById(id)
+            .findMaterialById(req.params.id)
             .catch((error) => (0, routes_exceptions_1.requestError)(error, res));
         // Send result if it exists.
         if (result)
@@ -101,7 +100,7 @@ function updateMaterialById(req, res) {
             .updateMaterial(req.params.id, req.body)
             .catch((error) => (0, routes_exceptions_1.requestError)(error, res));
         // Send result if it exists.
-        if (result)
+        if (result != null && result.acknowledged && result.modifiedCount > 0)
             res.sendStatus(204);
         else
             res.sendStatus(404);
@@ -120,7 +119,7 @@ function deleteMaterialById(req, res) {
             .deleteMaterial(req.params.id)
             .catch((error) => (0, routes_exceptions_1.requestError)(error, res));
         // Send result if it exists.
-        if (result)
+        if (result != null && result.acknowledged && result.deletedCount > 0)
             res.sendStatus(200);
         else
             res.sendStatus(404);

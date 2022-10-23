@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import * as db from "../db/material.db";
 import { requestError } from "../exceptions/routes.exceptions";
 import { validationResult } from "express-validator/src/validation-result";
-
 // Get all materials
 export async function getAllMaterials(req: Request, res: Response) {
   const result = await db
@@ -22,9 +21,8 @@ export async function getMaterialById(req: Request, res: Response) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { id } = req.params;
   const result = await db
-    .findMaterialById(id)
+    .findMaterialById(req.params.id)
     .catch((error) => requestError(error, res));
 
   // Send result if it exists.
@@ -62,7 +60,8 @@ export async function updateMaterialById(req: Request, res: Response) {
     .catch((error) => requestError(error, res));
 
   // Send result if it exists.
-  if (result) res.sendStatus(204);
+  if (result != null && result.acknowledged && result.modifiedCount > 0)
+    res.sendStatus(204);
   else res.sendStatus(404);
 }
 
@@ -79,6 +78,7 @@ export async function deleteMaterialById(req: Request, res: Response) {
     .catch((error) => requestError(error, res));
 
   // Send result if it exists.
-  if (result) res.sendStatus(200);
+  if (result != null && result.acknowledged && result.deletedCount > 0)
+    res.sendStatus(200);
   else res.sendStatus(404);
 }

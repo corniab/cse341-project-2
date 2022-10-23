@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import * as db from "../db/material.db";
 import { requestError } from "../exceptions/routes.exceptions";
 import { validationResult } from "express-validator/src/validation-result";
-import { type } from "os";
 
 // Get all materials
 export async function getAllMaterials(req: Request, res: Response) {

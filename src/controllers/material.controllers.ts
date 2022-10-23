@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import * as db from "../db/material.db";
 import { requestError } from "../exceptions/routes.exceptions";
+import { validationResult } from "express-validator/src/validation-result";
+import { type } from "os";
 
 // Get all materials
 export async function getAllMaterials(req: Request, res: Response) {
@@ -15,6 +17,12 @@ export async function getAllMaterials(req: Request, res: Response) {
 
 // Get by id
 export async function getMaterialById(req: Request, res: Response) {
+  // Validate request inputs
+  const errors = validationResult(req);
+  if (errors.isEmpty() === false) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const { id } = req.params;
   const result = await db
     .findMaterialById(id)
@@ -27,6 +35,12 @@ export async function getMaterialById(req: Request, res: Response) {
 
 // Create new material
 export async function createNewMaterial(req: Request, res: Response) {
+  // Validate request inputs
+  const errors = validationResult(req);
+  if (errors.isEmpty() === false) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const result = await db
     .insertNewMaterial(req.body)
     .catch((error) => requestError(error, res));
@@ -38,6 +52,12 @@ export async function createNewMaterial(req: Request, res: Response) {
 
 // Update material
 export async function updateMaterialById(req: Request, res: Response) {
+  // Validate request inputs
+  const errors = validationResult(req);
+  if (errors.isEmpty() === false) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const result = await db
     .updateMaterial(req.params.id, req.body)
     .catch((error) => requestError(error, res));
@@ -49,6 +69,12 @@ export async function updateMaterialById(req: Request, res: Response) {
 
 // Delete material
 export async function deleteMaterialById(req: Request, res: Response) {
+  // Validate request inputs
+  const errors = validationResult(req);
+  if (errors.isEmpty() === false) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const result = await db
     .deleteMaterial(req.params.id)
     .catch((error) => requestError(error, res));

@@ -1,5 +1,6 @@
 import express from "express";
 import * as controller from "../controllers/material.controllers";
+import * as validation from "../validation/validation";
 
 const materialRouter = express.Router();
 
@@ -29,7 +30,11 @@ materialRouter.get("/", controller.getAllMaterials);
  *        200:
  *          description: Success
  */
-materialRouter.get("/:id", controller.getMaterialById);
+materialRouter.get(
+  "/:id",
+  validation.queryParamsValidation,
+  controller.getMaterialById
+);
 
 /**
  * @swagger
@@ -79,7 +84,12 @@ materialRouter.get("/:id", controller.getMaterialById);
  *        201:
  *          description: Created
  */
-materialRouter.post("/", controller.createNewMaterial);
+materialRouter.post(
+  "/",
+  validation.queryParamsValidation,
+  validation.createMaterialValidation,
+  controller.createNewMaterial
+);
 
 /**
  * @swagger
@@ -132,7 +142,11 @@ materialRouter.post("/", controller.createNewMaterial);
  *       204:
  *         description:
  */
-materialRouter.put("/:id", controller.updateMaterialById);
+materialRouter.put(
+  "/:id",
+  validation.queryParamsValidation,
+  controller.updateMaterialById
+);
 
 /**
  * @swagger
@@ -149,6 +163,10 @@ materialRouter.put("/:id", controller.updateMaterialById);
  *        200:
  *          description: Success
  */
-materialRouter.delete("/:id", controller.deleteMaterialById);
+materialRouter.delete(
+  "/:id",
+  validation.queryParamsValidation,
+  controller.deleteMaterialById
+);
 
 export default materialRouter;

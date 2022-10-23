@@ -35,6 +35,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteMaterialById = exports.updateMaterialById = exports.createNewMaterial = exports.getMaterialById = exports.getAllMaterials = void 0;
 const db = __importStar(require("../db/material.db"));
 const routes_exceptions_1 = require("../exceptions/routes.exceptions");
+const validation_result_1 = require("express-validator/src/validation-result");
 // Get all materials
 function getAllMaterials(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -52,6 +53,11 @@ exports.getAllMaterials = getAllMaterials;
 // Get by id
 function getMaterialById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Validate request inputs
+        const errors = (0, validation_result_1.validationResult)(req);
+        if (errors.isEmpty() === false) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const { id } = req.params;
         const result = yield db
             .findMaterialById(id)
@@ -67,6 +73,11 @@ exports.getMaterialById = getMaterialById;
 // Create new material
 function createNewMaterial(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Validate request inputs
+        const errors = (0, validation_result_1.validationResult)(req);
+        if (errors.isEmpty() === false) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const result = yield db
             .insertNewMaterial(req.body)
             .catch((error) => (0, routes_exceptions_1.requestError)(error, res));
@@ -81,6 +92,11 @@ exports.createNewMaterial = createNewMaterial;
 // Update material
 function updateMaterialById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Validate request inputs
+        const errors = (0, validation_result_1.validationResult)(req);
+        if (errors.isEmpty() === false) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const result = yield db
             .updateMaterial(req.params.id, req.body)
             .catch((error) => (0, routes_exceptions_1.requestError)(error, res));
@@ -95,6 +111,11 @@ exports.updateMaterialById = updateMaterialById;
 // Delete material
 function deleteMaterialById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Validate request inputs
+        const errors = (0, validation_result_1.validationResult)(req);
+        if (errors.isEmpty() === false) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const result = yield db
             .deleteMaterial(req.params.id)
             .catch((error) => (0, routes_exceptions_1.requestError)(error, res));

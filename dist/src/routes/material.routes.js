@@ -28,6 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const controller = __importStar(require("../controllers/material.controllers"));
+const validation = __importStar(require("../validation/validation"));
 const materialRouter = express_1.default.Router();
 /**
  * @swagger
@@ -54,7 +55,7 @@ materialRouter.get("/", controller.getAllMaterials);
  *        200:
  *          description: Success
  */
-materialRouter.get("/:id", controller.getMaterialById);
+materialRouter.get("/:id", validation.queryParamsValidation, controller.getMaterialById);
 /**
  * @swagger
  * /materials:
@@ -103,7 +104,7 @@ materialRouter.get("/:id", controller.getMaterialById);
  *        201:
  *          description: Created
  */
-materialRouter.post("/", controller.createNewMaterial);
+materialRouter.post("/", validation.queryParamsValidation, validation.createMaterialValidation, controller.createNewMaterial);
 /**
  * @swagger
  * /materials/{id}:
@@ -155,7 +156,7 @@ materialRouter.post("/", controller.createNewMaterial);
  *       204:
  *         description:
  */
-materialRouter.put("/:id", controller.updateMaterialById);
+materialRouter.put("/:id", validation.queryParamsValidation, controller.updateMaterialById);
 /**
  * @swagger
  * /materials/{id}:
@@ -171,5 +172,5 @@ materialRouter.put("/:id", controller.updateMaterialById);
  *        200:
  *          description: Success
  */
-materialRouter.delete("/:id", controller.deleteMaterialById);
+materialRouter.delete("/:id", validation.queryParamsValidation, controller.deleteMaterialById);
 exports.default = materialRouter;

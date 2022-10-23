@@ -104,7 +104,7 @@ materialRouter.get("/:id", validation.queryParamsValidation, controller.getMater
  *        201:
  *          description: Created
  */
-materialRouter.post("/", validation.queryParamsValidation, validation.createMaterialValidation, controller.createNewMaterial);
+materialRouter.post("/", validation.createMaterialValidation, controller.createNewMaterial);
 /**
  * @swagger
  * /materials/{id}:

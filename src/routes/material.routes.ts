@@ -86,7 +86,6 @@ materialRouter.get(
  */
 materialRouter.post(
   "/",
-  validation.queryParamsValidation,
   validation.createMaterialValidation,
   controller.createNewMaterial
 );

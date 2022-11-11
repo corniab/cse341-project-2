@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import * as db from "../db/die.db";
-import { requestError } from "../exceptions/routes.exceptions";
-import { validationResult } from "express-validator/src/validation-result";
+import { Request, Response } from 'express';
+import * as db from '../db/die.db';
+import { requestError } from '../exceptions/routes.exceptions';
+import { validationResult } from 'express-validator/src/validation-result';
 // Get all Dies
 export async function getAllDies(req: Request, res: Response) {
   const result = await db

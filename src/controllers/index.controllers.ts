@@ -1,5 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 export function getHomePage(req: Request, res: Response) {
-  res.send("Ben Cornia!");
+  res.render('pages/index', {
+    name: 'Ben',
+    title: 'Home',
+  });
 }

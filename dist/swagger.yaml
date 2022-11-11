@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: Sheet Metal API
+  description: Provides brake press tooling information and available materials
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Development server
+
+tags:
+  - name: dies
+    description: A vee shaped block that forms sheet metal
+  - name: punches
+    description: Presses sheet metal into the die
+  - name: materials
+    description: Materials available in the shop
+
+paths:
+  /dies:
+    get:
+      tags:
+        - dies
+      summary: Returns a list of all dies
+      description: Awesome Sauce
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                  items:
+                    $ref: '#/components/schemas/Die'
+
+    post:
+      tags:
+        - dies
+      summary: Add a new die
+      requestBody:
+        description: Adds a new die
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/Die'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                  properties:
+                    _id: string
+
+  /dies/{id}:
+    get:
+      tags:
+        - dies
+    put:
+      tags:
+        - dies
+    delete:
+      tags:
+        - dies
+  /punches:
+    get:
+      tags:
+        - punches
+    post:
+      tags:
+        - punches
+  /punches/{id}:
+    get:
+      tags:
+        - punches
+    put:
+      tags:
+        - punches
+    delete:
+      tags:
+        - punches
+  /materials:
+    get:
+      tags:
+        - materials
+    post:
+      tags:
+        - materials
+  /materials/{id}:
+    get:
+      tags:
+        - materials
+    put:
+      tags:
+        - materials
+    delete:
+      tags:
+        - materials
+
+components:
+  schemas:
+    Die:
+      type: object
+      properties:
+        _id:
+          type: string
+        type:
+          type: string
+        width:
+          type: string
+        veeWidth:
+          type: string
+        veeAngle:
+          type: string
+        maxMaterialThickness:
+          type: string
+        __v:
+          type: integer

@@ -1,6 +1,7 @@
 import express from 'express';
 import * as controller from '../controllers/die.controllers';
 import * as validation from '../validation/validation';
+import { requiresAuth } from 'express-openid-connect';
 
 const dieRouter = express.Router();
 /**
@@ -48,7 +49,7 @@ const dieRouter = express.Router();
  *      200:
  *        description: Success
  */
-dieRouter.get('/', controller.getAllDies);
+dieRouter.get('/', requiresAuth(), controller.getAllDies);
 /**
  * @openapi
  * /dies/{id}:

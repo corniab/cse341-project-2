@@ -43,10 +43,13 @@ function getAllDies(req, res) {
             .findAllDies()
             .catch((error) => (0, routes_exceptions_1.requestError)(error, res));
         // Send result if it exists.
-        if (result)
-            res.status(200).json(result);
-        else
+        if (result) {
+            res.send(JSON.stringify(req.oidc.user));
+            //res.status(200).json(result);
+        }
+        else {
             res.sendStatus(404);
+        }
     });
 }
 exports.getAllDies = getAllDies;

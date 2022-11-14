@@ -13,26 +13,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const path_1 = __importDefault(require("path"));
+const app_1 = __importDefault(require("../config/app"));
 class Connection {
     constructor() {
-        // Make environment variables available in application
-        dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../config/.env") });
         // Connection String
-        this.uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@nodeapp2.rloalnf.mongodb.net/?retryWrites=true&w=majority`;
+        this.uri = `mongodb+srv://${app_1.default.dbUserName}:${app_1.default.dbPassword}@nodeapp2.rloalnf.mongodb.net/?retryWrites=true&w=majority`;
         this.client = mongoose_1.default;
     }
     // Makes a connection to the database.
     init() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("🔌 [database] Connecting to db...");
+            console.log('🔌 [database] Connecting to db...');
             try {
-                yield this.client.connect(this.uri, { dbName: "sheetmetal" });
-                console.log("🤝 [database] Connection complete!");
+                yield this.client.connect(this.uri, { dbName: 'sheetmetal' });
+                console.log('🤝 [database] Connection complete!');
             }
             catch (e) {
-                console.log("😿 [database] Error: " + e);
+                console.log('😿 [database] Error: ' + e);
             }
         });
     }

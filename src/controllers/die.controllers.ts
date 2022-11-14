@@ -9,8 +9,12 @@ export async function getAllDies(req: Request, res: Response) {
     .catch((error) => requestError(error, res));
 
   // Send result if it exists.
-  if (result) res.status(200).json(result);
-  else res.sendStatus(404);
+  if (result) {
+    res.send(JSON.stringify(req.oidc.user));
+    //res.status(200).json(result);
+  } else {
+    res.sendStatus(404);
+  }
 }
 
 // Get by id

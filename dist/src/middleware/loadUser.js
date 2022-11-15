@@ -17,6 +17,7 @@ const app_1 = __importDefault(require("../config/app"));
 const user_db_1 = __importDefault(require("../db/user.db"));
 function loadUser(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log(req.headers.authorization);
         const authZeroUser = yield fetchAuthZeroUser(req.headers.authorization);
         const user = yield findOrCreateUser(authZeroUser);
         req.user = user;

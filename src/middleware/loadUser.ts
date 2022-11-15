@@ -7,7 +7,9 @@ export async function loadUser(
   res: Response,
   next: NextFunction
 ) {
+  console.log(req.headers.authorization);
   const authZeroUser = await fetchAuthZeroUser(req.headers.authorization);
+
   const user = await findOrCreateUser(authZeroUser);
 
   req.user = user;

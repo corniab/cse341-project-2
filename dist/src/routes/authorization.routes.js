@@ -31,4 +31,5 @@ const authorization = __importStar(require("../controllers/authorization.control
 const authRouter = express_1.default.Router();
 authRouter.get('/login', authorization.login);
 authRouter.get('/callback', authorization.callback);
+authRouter.get('/logout', authorization.logout);
 exports.default = authRouter;

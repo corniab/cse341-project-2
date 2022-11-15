@@ -29,7 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const controller = __importStar(require("../controllers/die.controllers"));
 const validation = __importStar(require("../validation/validation"));
-const express_openid_connect_1 = require("express-openid-connect");
 const dieRouter = express_1.default.Router();
 /**
  * @openapi
@@ -74,7 +73,7 @@ const dieRouter = express_1.default.Router();
  *      200:
  *        description: Success
  */
-dieRouter.get('/', (0, express_openid_connect_1.requiresAuth)(), controller.getAllDies);
+dieRouter.get('/', controller.getAllDies);
 /**
  * @openapi
  * /dies/{id}:

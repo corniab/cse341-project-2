@@ -10,8 +10,7 @@ export async function getAllDies(req: Request, res: Response) {
 
   // Send result if it exists.
   if (result) {
-    res.send(JSON.stringify(req.oidc.user));
-    //res.status(200).json(result);
+    res.status(200).json(result);
   } else {
     res.sendStatus(404);
   }

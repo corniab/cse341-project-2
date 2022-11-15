@@ -7,12 +7,21 @@ export async function loadUser(
   res: Response,
   next: NextFunction
 ) {
-  console.log(req.headers.authorization);
-  const authZeroUser = await fetchAuthZeroUser(req.headers.authorization);
+  let authorizationValue = undefined;
+  if (req.cookies.userSessionId) {
+    authorizationValue = req.cookies.userSessionId;
+  } else if (req.headers.authorization) {
+    authorizationValue = req.headers.authorization;
+  } else {
+    res.redirect('http://localhost:3000');
+    return;
+  }
+
+  const authZeroUser = await fetchAuthZeroUser(authorizationValue);
 
   const user = await findOrCreateUser(authZeroUser);
 
-  req.user = user;
+  res.cookie('userInfo', JSON.stringify(user), { maxAge: 400000 });
   next();
 }
 
@@ -24,7 +33,7 @@ async function fetchAuthZeroUser(authorizationValue: any) {
   return response.json();
 }
 
-export async function findOrCreateUser(authZeroJson: any) {
+async function findOrCreateUser(authZeroJson: any) {
   if (!authZeroJson) return;
 
   const existingUser = await User.findOne({ identifer: authZeroJson.sub });

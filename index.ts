@@ -6,6 +6,7 @@ import BodyParser from 'body-parser';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocs from './swagger';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 
 // Create express app
 const app = express();
@@ -19,6 +20,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve api docs
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+// Include cookie parser
+app.use(cookieParser());
 
 // Include body parser
 app.use(BodyParser.json());

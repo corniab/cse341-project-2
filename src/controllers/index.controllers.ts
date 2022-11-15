@@ -1,18 +1,17 @@
 import { Request, Response } from 'express';
 
-type PageData = {
-  title: string;
-  name?: string;
-};
-
 export function getHomePage(req: Request, res: Response) {
-  const pageData: PageData = {
+  const pageData = {
     title: 'Home',
-    name: undefined,
+    firstName: undefined,
+    lastName: undefined,
   };
 
-  if (req.user) {
-    pageData.name = req.user.givenName;
+  console.log(req.cookies.userInfo);
+  if (req.cookies.userInfo) {
+    const userInfo = JSON.parse(req.cookies.userInfo);
+    pageData.firstName = userInfo.givenName;
+    pageData.lastName = userInfo.familyName;
   }
 
   res.render('pages/index', pageData);

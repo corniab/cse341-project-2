@@ -38,10 +38,10 @@ router.get('/', getHomePage);
 router.use('/materials', loadUser, materialRouter);
 
 // Dies router
-router.use('/dies', diesRouter);
+router.use('/dies', loadUser, diesRouter);
 
 // Punch router
-router.use('/punches', punchRouter);
+router.use('/punches', loadUser, punchRouter);
 
 // Auth router
 router.use('/authorization', authRouter);

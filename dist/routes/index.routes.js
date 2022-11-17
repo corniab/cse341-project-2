@@ -9,21 +9,16 @@ const material_routes_1 = __importDefault(require("./material.routes"));
 const die_routes_1 = __importDefault(require("./die.routes"));
 const punch_routes_1 = __importDefault(require("./punch.routes"));
 const authorization_routes_1 = __importDefault(require("./authorization.routes"));
+const user_routes_1 = __importDefault(require("./user.routes"));
 const loadUser_1 = require("../middleware/loadUser");
 const router = express_1.default.Router();
 /**
  * @openapi
  * components:
- *  securitySchemes:
- *    oAuthSample:
- *      type: oauth2
- *      description:
- *      flows:
- *        authorizationCode:
- *          authorizationUrl: https://api.example.com/oauth2/authorize
- *          scopes:
- *            read: read access
- *            write: modify access
+ *   securitySchemes:
+ *     bearerAuth:            # arbitrary name for the security scheme
+ *       type: http
+ *       scheme: bearer
  */
 /**
  * @openapi
@@ -42,4 +37,6 @@ router.use('/dies', loadUser_1.loadUser, die_routes_1.default);
 router.use('/punches', loadUser_1.loadUser, punch_routes_1.default);
 // Auth router
 router.use('/authorization', authorization_routes_1.default);
+// User router
+router.use('/users', user_routes_1.default);
 exports.default = router;

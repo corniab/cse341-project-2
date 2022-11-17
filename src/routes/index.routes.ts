@@ -4,6 +4,7 @@ import materialRouter from './material.routes';
 import diesRouter from './die.routes';
 import punchRouter from './punch.routes';
 import authRouter from './authorization.routes';
+import userRouter from './user.routes';
 import { loadUser } from '../middleware/loadUser';
 
 const router = express.Router();
@@ -11,16 +12,10 @@ const router = express.Router();
 /**
  * @openapi
  * components:
- *  securitySchemes:
- *    oAuthSample:
- *      type: oauth2
- *      description:
- *      flows:
- *        authorizationCode:
- *          authorizationUrl: https://api.example.com/oauth2/authorize
- *          scopes:
- *            read: read access
- *            write: modify access
+ *   securitySchemes:
+ *     bearerAuth:            # arbitrary name for the security scheme
+ *       type: http
+ *       scheme: bearer
  */
 
 /**
@@ -45,5 +40,8 @@ router.use('/punches', loadUser, punchRouter);
 
 // Auth router
 router.use('/authorization', authRouter);
+
+// User router
+router.use('/users', userRouter);
 
 export default router;

@@ -20,7 +20,6 @@ function loadUser(req, res, next) {
         if (req.headers.authorization) {
             const authZeroUser = yield fetchAuthZeroUser(req.headers.authorization);
             const user = yield findOrCreateUser(authZeroUser);
-            res.send(user);
         }
         next();
     });

@@ -30,15 +30,5 @@ export async function callback(req: Request, res: Response) {
   });
 
   const jsonResponse = await response.json();
-  res.cookie('userSessionId', 'Bearer ' + jsonResponse.access_token, {
-    maxAge: 400000,
-  });
-  res.redirect('http://localhost:3000');
-}
-
-export function logout(req: Request, res: Response) {
-  res.clearCookie('userInfo');
-  res.clearCookie('userSessionId');
-
-  res.redirect('http://localhost:3000');
+  res.json(jsonResponse);
 }

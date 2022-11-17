@@ -17,20 +17,11 @@ const app_1 = __importDefault(require("../config/app"));
 const user_db_1 = __importDefault(require("../db/user.db"));
 function loadUser(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        let authorizationValue = undefined;
-        if (req.cookies.userSessionId) {
-            authorizationValue = req.cookies.userSessionId;
+        if (req.headers.authorization) {
+            const authZeroUser = yield fetchAuthZeroUser(req.headers.authorization);
+            const user = yield findOrCreateUser(authZeroUser);
+            res.send(user);
         }
-        else if (req.headers.authorization) {
-            authorizationValue = req.headers.authorization;
-        }
-        else {
-            res.redirect('http://localhost:3000');
-            return;
-        }
-        const authZeroUser = yield fetchAuthZeroUser(authorizationValue);
-        const user = yield findOrCreateUser(authZeroUser);
-        res.cookie('userInfo', JSON.stringify(user), { maxAge: 400000 });
         next();
     });
 }

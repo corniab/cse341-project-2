@@ -19,8 +19,8 @@ const router = express_1.default.Router();
  *      type: oauth2
  *      description:
  *      flows:
- *        authorizationCode:
- *          authorizationUrl: https://api.example.com/oauth2/authorize
+ *        implicit:
+ *          authorizationUrl: http://localhost:3000/api/v1/authorization/login
  *          scopes:
  *            read: read access
  *            write: modify access

@@ -7,6 +7,4 @@ authRouter.get('/login', authorization.login);
 
 authRouter.get('/callback', authorization.callback);
 
-authRouter.get('/logout', authorization.logout);
-
 export default authRouter;

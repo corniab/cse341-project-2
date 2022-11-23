@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import connection from './connection.db';
+import IUser from '../types/custom';
 
 const userSchema = new Schema<IUser>({
   identifer: String,

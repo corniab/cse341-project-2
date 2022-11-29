@@ -11,6 +11,9 @@ export async function loadUser(
     const authZeroUser = await fetchAuthZeroUser(req.headers.authorization);
 
     const user = await findOrCreateUser(authZeroUser);
+  } else {
+    res.sendStatus(403);
+    return;
   }
   next();
 }

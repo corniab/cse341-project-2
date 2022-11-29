@@ -30,5 +30,5 @@ export async function callback(req: Request, res: Response) {
   });
 
   const jsonResponse = await response.json();
-  res.json(jsonResponse);
+  res.send(jsonResponse.access_token);
 }

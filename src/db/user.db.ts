@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import connection from './connection.db';
 import IUser from '../types/custom';
 

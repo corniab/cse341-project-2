@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import { Response } from 'express';
 
-export function requestError(error: any, res: Response) {
+export function requestError(error: Error | object, res: Response) {
   let message = error;
   if (error instanceof Error) {
     message = {

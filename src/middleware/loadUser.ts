@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import config from '../config/app';
 import User from '../db/user.db';
 
@@ -10,7 +10,7 @@ export async function loadUser(
   if (req.headers.authorization) {
     const authZeroUser = await fetchAuthZeroUser(req.headers.authorization);
 
-    const user = await findOrCreateUser(authZeroUser);
+    await findOrCreateUser(authZeroUser);
   } else {
     res.sendStatus(403);
     return;
@@ -19,14 +19,14 @@ export async function loadUser(
 }
 
 // Helper
-async function fetchAuthZeroUser(authorizationValue: any) {
+async function fetchAuthZeroUser(authorizationValue: string) {
   const response = await fetch(`${config.authorizationHost}/userinfo`, {
     headers: { Authorization: authorizationValue },
   });
   return response.json();
 }
 
-async function findOrCreateUser(authZeroJson: any) {
+async function findOrCreateUser(authZeroJson: object) {
   if (!authZeroJson) return;
 
   const existingUser = await User.findOne({ identifer: authZeroJson.sub });

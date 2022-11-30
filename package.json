@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon",
-    "build": "npm run clean && npm run tsc && npm run copy",
-    "tsc": "tsc",
+    "build": "npm install && npm run clean && tsc && npm run copy",
     "clean": "rm -rf dist",
     "copy": "cp -r src/public dist",
     "lint": "eslint . --ext .ts"

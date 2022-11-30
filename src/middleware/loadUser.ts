@@ -2,6 +2,15 @@ import { Request, Response, NextFunction } from 'express';
 import config from '../config/app';
 import User from '../db/user.db';
 
+interface IAuthResponse {
+  sub: string;
+  email: string;
+  given_name: string;
+  family_name: string;
+  locale: string;
+  picture: string;
+}
+
 export async function loadUser(
   req: Request,
   res: Response,
@@ -26,7 +35,7 @@ async function fetchAuthZeroUser(authorizationValue: string) {
   return response.json();
 }
 
-async function findOrCreateUser(authZeroJson: object) {
+async function findOrCreateUser(authZeroJson: IAuthResponse) {
   if (!authZeroJson) return;
 
   const existingUser = await User.findOne({ identifer: authZeroJson.sub });

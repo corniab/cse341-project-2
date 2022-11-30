@@ -1,5 +1,5 @@
 import User from '../db/user.db';
-import express, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { requestError } from '../exceptions/routes.exceptions';
 
 export default {

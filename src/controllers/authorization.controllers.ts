@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import config from '../config/app';
 
 export function login(req: Request, res: Response) {

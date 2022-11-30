@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { getHomePage } from '../controllers/index.controllers';
 import materialRouter from './material.routes';
 import diesRouter from './die.routes';

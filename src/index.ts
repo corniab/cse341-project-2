@@ -14,6 +14,7 @@ const app = express();
 const authConfig = {
   authRequired: false,
   authOlogout: true,
+  secret: '',
 };
 
 app.use(auth(authConfig));

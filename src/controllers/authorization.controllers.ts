@@ -1,5 +1,14 @@
 import { Request, Response } from 'express';
 import config from '../config/app';
+import fetch from 'node-fetch';
+
+interface IAuthToken {
+  access_token: string;
+  id_token: string;
+  scope: string;
+  expires_in: number;
+  token_type: string;
+}
 
 export function login(req: Request, res: Response) {
   const authorizationURL = `${
@@ -29,6 +38,6 @@ export async function callback(req: Request, res: Response) {
     }),
   });
 
-  const jsonResponse = await response.json();
+  const jsonResponse: IAuthToken = await response.json();
   res.send(jsonResponse.access_token);
 }

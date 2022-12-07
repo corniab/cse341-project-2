@@ -6,18 +6,9 @@ import BodyParser from 'body-parser';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocs from './swagger';
 import path from 'path';
-import { auth } from 'express-openid-connect';
 
 // Create express app
 const app = express();
-
-const authConfig = {
-  authRequired: false,
-  authOlogout: true,
-  secret: 'sdfoisfogpoiwpoPOHohP335hpojPOKojp343',
-};
-
-app.use(auth(authConfig));
 
 // Server static files
 app.use(express.static(path.join(__dirname, 'public')));

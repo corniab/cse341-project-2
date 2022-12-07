@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import config from '../config/app';
 import User from '../db/user.db';
+import fetch from 'node-fetch';
 
 interface IAuthResponse {
   sub: string;
